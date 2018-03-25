@@ -7,7 +7,6 @@ import sys
 import time
 import requests
 import string
-import boto3
 import json
 
 app = Flask(__name__)
