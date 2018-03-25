@@ -41,7 +41,7 @@
             <div class="center">
                 <form name="recordRes" method=POST enctype=multipart/form-data action="{{ url_for('record') }}"></form>
 
-                <h3>Hello <span class="uname">{{ session['username'] }}</span>, your InstCal results are</h3>
+                <h3>Hey <span class="uname">{{ session['username'] }}</span>, your InstCal results are</h3>
                 <h4><span class="glyphicon glyphicon-cutlery"></span>&nbsp;&nbsp;Total Energy: <span class="totalCal">{{ cal_init }}</span> Cal</h4>
                 <h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Total Price: <span class="totalPrice">{{price_init}}</span> Dollars</h4>
                 <button type="button" class="btn btn-success">Record</button>

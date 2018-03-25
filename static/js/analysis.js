@@ -17,7 +17,7 @@ function addHidden(theForm, key, value) {
 
 
 $('.btn-success').click(function(e){
-    vat theForm = document.recordRes;
+    var theForm = document.recordRes;
     addHidden(theForm, username, uname);
     addHidden(theForm, calories, totalcal);
     addHidden(theForm, spending, price);
