@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for, jsonify
+from flask_sqlalchemy import SQLAlchemy
 import os
 import hashlib
 import urllib
