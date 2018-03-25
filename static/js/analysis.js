@@ -29,7 +29,8 @@ $('.btn-number').click(function(e){
     
     fieldName = $(this).attr('data-field');
     type      = $(this).attr('data-type');
-    var input = $("input[name="+fieldName+"]");
+    var input = $("input[name='"+fieldName+"']");
+    console.log(input);
     var currentVal = parseInt(input.val());
     var cal = parseInt($(this).attr('cal'))
     val unit_price = parseInt($(this).attr('price'));
