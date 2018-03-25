@@ -13,17 +13,21 @@ restaurant = {"shakeshack" : {"shackburger": ['Shack Burger',490],
                               "shacksmoke": ['Smoke Shack Burger', 630],
                               "doublesmokeshack":910,
                               "shroomshack" :['Shroom Shack Burger',630],
+                              'burgershroom':['Shroom Shack Burger',630],
                               "shackstack":770,
                               "hamburger":360,
                               "doublehamburger":570,
                               "shackcagodog":335,
                               "cheesefries":['Cheese Fries',685],
                               "regsoda":['Small Fountain Soda',180],
+                              "smsoda":['Small Fountain Soda',180],
                               "regrootbeer":180,
-                              'icedregtea': ['Small Iced Tea',0]}, }
+                              'icedregtea': ['Small Iced Tea',0],
+                              "frenchfries":['French Fries',470]
+                              },}
 
 def appex_same_number(n1,n2):
-    if n1-n2 <= 15 and n1-n2 > -15:
+    if n1-n2 <= 10 and n1-n2 > -10:
         return True
     else:
         return False
