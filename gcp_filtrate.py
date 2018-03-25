@@ -10,17 +10,17 @@ from google.cloud.vision import types
 # restaurant dic that contains res restaurant name and it recipe.
 restaurant = {"shakeshack" : {"shackburger": ['Shack Burger',490],
                               "doubleshackburger":770,
-                              "smokeshack": ['Smoke Shack Burger', 630],
+                              "shacksmoke": ['Smoke Shack Burger', 630],
                               "doublesmokeshack":910,
                               "shroomshack" :['Shroom Shack Burger',630],
                               "shackstack":770,
                               "hamburger":360,
                               "doublehamburger":570,
                               "shackcagodog":335,
-                              "friescheese":['Cheese Fries',685],
+                              "cheesefries":['Cheese Fries',685],
                               "regsoda":['Small Fountain Soda',180],
                               "regrootbeer":180,
-                              'regicedtea': ['Small Iced Tea',0]}, }
+                              'icedregtea': ['Small Iced Tea',0]}, }
 
 def appex_same_number(n1,n2):
     if n1-n2 <= 15 and n1-n2 > -15:
@@ -110,8 +110,7 @@ def filtrate_useful_information(d):
                     alphaList.append(item)
                 elif item.isalpha()==False and isnumber(item) == True:
                     price = convertNumber(item)
-            food_name_detect = ''.join(alphaList).lower()
-            food_name = ' '.join(alphaList)
+            food_name_detect = ''.join(sorted(alphaList)).lower()
             if food_name_detect in restaurant[restaurantName]:
                 each_item.append(restaurant[restaurantName][food_name_detect][0])
                 each_item.append(restaurant[restaurantName][food_name_detect][1])
