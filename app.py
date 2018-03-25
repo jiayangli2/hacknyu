@@ -65,8 +65,8 @@ def record():
 	    uname = request.form['username']
 	    calories = request.form['calories']
 	    spending = request.form['spending']
-	    datetime = datetime.now(tz)
-	    record_created = Record(username = uname, time = datetime, calories=calories, spending=spending)
+	    dtime = datetime.now(tz)
+	    record_created = Record(username = uname, time = dtime, calories=calories, spending=spending)
 	    try:
 	        db.session.add(record_created)
 	        db.session.commit()
