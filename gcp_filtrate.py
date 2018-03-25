@@ -106,6 +106,8 @@ def filtrate_useful_information(d):
             alphaList = []
             price = 0
             for item in all_line[i]:
+                if ")" in item:
+                    item =item.replace(')','')
                 if item.isalpha():
                     alphaList.append(item)
                 elif item.isalpha()==False and isnumber(item) == True:
