@@ -33,7 +33,7 @@ $('.btn-number').click(function(e){
     console.log(input);
     var currentVal = parseInt(input.val());
     var cal = parseInt($(this).attr('cal'))
-    val unit_price = parseInt($(this).attr('price'));
+    var unit_price = parseInt($(this).attr('price'));
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
             
