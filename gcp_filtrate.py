@@ -8,19 +8,19 @@ from google.cloud.vision import types
 
 
 # restaurant dic that contains res restaurant name and it recipe.
-restaurant = {"shakeshack" : {"shackburger": 490,
+restaurant = {"shakeshack" : {"shackburger": ['Shack Burger',490],
                               "doubleshackburger":770,
-                              "smokeshack":630,
+                              "smokeshack": ['Smoke Shack Burger', 630],
                               "doublesmokeshack":910,
-                              "shroomshack":630,
+                              "shroomshack" :['Shroom Shack Burger',630],
                               "shackstack":770,
                               "hamburger":360,
                               "doublehamburger":570,
                               "shackcagodog":335,
-                              "friescheese":685,
-                              "regsoda":180,
+                              "friescheese":['Cheese Fries',685],
+                              "regsoda":['Small Fountain Soda',180],
                               "regrootbeer":180,
-                              'regicedtea':0}, }
+                              'regicedtea': ['Small Iced Tea',0]}, }
 
 def appex_same_number(n1,n2):
     if n1-n2 <= 15 and n1-n2 > -15:
@@ -113,8 +113,8 @@ def filtrate_useful_information(d):
             food_name_detect = ''.join(alphaList).lower()
             food_name = ' '.join(alphaList)
             if food_name_detect in restaurant[restaurantName]:
-                each_item.append(food_name)
-                each_item.append(restaurant[restaurantName][food_name_detect])
+                each_item.append(restaurant[restaurantName][food_name_detect][0])
+                each_item.append(restaurant[restaurantName][food_name_detect][1])
                 each_item.append(price)
         copy_each_item = copy.deepcopy(each_item)
         final_out_list.append(copy_each_item)
