@@ -112,6 +112,8 @@ def receipt():
 	#print(food_list)
 	food_list = [('shakeburger', '490', '2', '5.19'), ('smokeshack', '770', '1', '6.69')]
 	return render_template("analysis.html", food_list = food_list, price_init=25.25, cal_init=1250)
+	
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == "__main__":
 	db.create_all()
