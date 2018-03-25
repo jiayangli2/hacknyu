@@ -52,12 +52,11 @@ def deleteDuplicatedElementFromList(list):
 
 # Imports the Google Cloud client library
 # function return a list contant text and location in the pic. The list item is like [name,[x:,y:]*4]
-def detect_text(path):
+def detect_text(img):
     """Detects text in the file."""
     client = vision.ImageAnnotatorClient()
 
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
+    content=img
 
     image = types.Image(content=content)
 
@@ -127,10 +126,10 @@ def filtrate_useful_information(d):
             FINAL_OUT_LIST.append(i)
     return FINAL_OUT_LIST
 
+def filter(img):
+    test_text = detect_text("test.jpg")
+    new_test_text = reorder(test_text)
+    return filtrate_useful_information(new_test_text)
 
-
-test_text = detect_text("test.jpg")
-new_test_text= reorder(test_text)
-filtrate_useful_information(new_test_text)
 
 
