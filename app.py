@@ -89,7 +89,7 @@ def login():
             print ("no such user")
             return render_template("index.html", **context)
         else:
-        	session['username'] = uname
+            session['username'] = uname
             return redirect(url_for('index'))
     except:
         err_msg = "connection to DB failed"
