@@ -57,12 +57,11 @@ def detect_text(encoded_img):
 def index():
     return render_template("index.html")
 
-@app.route('/register', methods=['GET'])
-def register():
-	return render_template("register.html")
 
 @app.route('/register', methods=['POST'])
 def register():
+	if request.method == 'GET':
+		return render_template("register.html")
     if request.method == 'POST':
         uname = request.form['username']
         pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
@@ -81,12 +80,11 @@ def register():
     context = dict(data = err_msg)
     return render_template("index.html", **context)
 
-@app.route('/login', methods=['GET'])
-def login():
-	return render_template("login.html")
 
 @app.route('/login', methods=['POST'])
 def login():
+	if request.method == 'GET':
+		return render_template("login.html")
     uname = request.form['username']
     pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
     try:
