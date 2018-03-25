@@ -56,7 +56,7 @@ tz = timezone('EST')
 
 @app.route('/')
 def index():
-	print("hi")
+    print("hi")
     return render_template("index.html")
 
 @app.route('/record', methods=['POST','GET'])
