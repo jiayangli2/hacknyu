@@ -2,7 +2,7 @@
 //http://jsfiddle.net/laelitenetwork/puJ6G/
 
 var totalcal = parseInt($('.totalCal').text())
-var price = parseInt($('.totalPrice').text())
+var price = parseFloat($('.totalPrice').text())
 var uname = ($('.uname').text())
 
 function addHidden(theForm, key, value) {
@@ -30,10 +30,9 @@ $('.btn-number').click(function(e){
     fieldName = $(this).attr('data-field');
     type      = $(this).attr('data-type');
     var input = $("input[name='"+fieldName+"']");
-    console.log(input);
     var currentVal = parseInt(input.val());
     var cal = parseInt($(this).attr('cal'))
-    var unit_price = parseInt($(this).attr('price'));
+    var unit_price = parseFloat($(this).attr('price'));
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
             
