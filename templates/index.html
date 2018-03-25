@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>InstaCal</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style type="text/css">
+            #drop_zone {
+              border-left: solid 3px;
+              border-left-color: #4286f4;
+              width:  50%;
+              height: 100px;
+              margin: auto;
+              padding-left: 5%;
+            }
+
+            #drop_zone2 {
+              border-style: dashed;
+              border-width: 0px;
+              border-color: grey;
+              padding-top: 2%;
+              margin: 0 0;
+            }
+
+            body {
+               background-image: url("https://s3.amazonaws.com/hackathon-2018-nyu/background.jpg");
+            }
+            .center{
+                margin: auto;
+                margin-top: 5%;
+                width: 50%;
+                border-left: solid 3px;
+                border-left-color: #4286f4;
+                margin-bottom:20px;
+                padding-left: 5%;
+            }
+            .center2 {
+                border-left: solid 0px;
+            }
+            .submit-btn {
+                padding-left: 45%;
+            }
+        </style> 
+        <script>
+            function dropHandler(ev) {
+              console.log('File(s) dropped');
+
+              // Prevent default behavior (Prevent file from being opened)
+              ev.preventDefault();
+              let fileInput = document.querySelector('input');
+              fileInput.files = ev.dataTransfer.files;
+              if (ev.dataTransfer.items) {
+                // Use DataTransferItemList interface to access the file(s)
+                for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+                  // If dropped items aren't files, reject them
+                  if (ev.dataTransfer.items[i].kind === 'file') {
+                    var file = ev.dataTransfer.items[i].getAsFile();
+                    console.log('... file[' + i + '].name = ' + file.name);
+                    var doc = document.uploadImg;
+                    doc.submit();
+                  }
+                }
+              } else {
+                // Use DataTransfer interface to access the file(s)
+                for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+                  console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+                  var doc = document.uploadImg;
+                  doc.submit();
+                }
+              } 
+              
+              // Pass event to removeDragData for cleanup
+              removeDragData(ev)
+            }
+            function dragOverHandler(ev) {
+              console.log('File(s) in drop zone'); 
+
+              // Prevent default behavior (Prevent file from being opened)
+              ev.preventDefault();
+            }
+            function removeDragData(ev) {
+              console.log('Removing drag data')
+
+              if (ev.dataTransfer.items) {
+                // Use DataTransferItemList interface to remove the drag data
+                ev.dataTransfer.items.clear();
+              } else {
+                // Use DataTransfer interface to remove the drag data
+                ev.dataTransfer.clearData();
+              }
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default">
+                <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">InstaCal</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                </ul>
+            </div>
+                </div>
+        </nav>
+        
+        <div class="container">
+            <div class="center">
+                <form name="uploadImg" method=POST enctype=multipart/form-data action="{{ url_for('receipt') }}">
+                    <h3>Upload your check here</h3>
+                    <input type=file name=photo>
+                    <div class="submit-btn"><input class="btn btn-primary" type="submit"></div>
+                </form>
+            </div>
+            <div class="center center2"><h3>Or</h3></div>
+            <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+              <div id="drop_zone2"><h3>Drag your check to this Zone ...</h3></div>
+            </div>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+

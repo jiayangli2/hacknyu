@@ -1,0 +1,17 @@
+body {
+   background-image: url("https://s3.amazonaws.com/hackathon-2018-nyu/background.jpg");
+}
+
+.center{
+    margin: auto;
+    width: 50%;
+    padding: 2%;
+    margin-bottom:20px;
+    border-left: solid 3px;
+    border-left-color: #4286f4;
+    padding-left: 5%;
+}
+
+.container {
+    padding-bottom: 10%;
+}
