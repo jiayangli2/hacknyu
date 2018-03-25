@@ -127,7 +127,7 @@ def filtrate_useful_information(d):
     return FINAL_OUT_LIST
 
 def filter(img):
-    test_text = detect_text("test.jpg")
+    test_text = detect_text(img)
     new_test_text = reorder(test_text)
     return filtrate_useful_information(new_test_text)
 
