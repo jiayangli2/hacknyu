@@ -42,4 +42,4 @@ def receipt():
 	return render_template("analysis.html", food_list = food_list, price_init=25.25, cal_init=1250)
 
 if __name__ == "__main__":
-    app.run()
+	app.run(host='0.0.0.0', port = 80)
