@@ -59,21 +59,25 @@ def index():
 	print("hi")
     return render_template("index.html")
 
-@app.route('/record', methods=['POST'])
+@app.route('/record', methods=['POST','GET'])
 def record():
-    uname = request.form['username']
-    calories = request.form['calories']
-    spending = request.form['spending']
-    datetime = datetime.now(tz)
-    record_created = Record(username = uname, time = datetime, calories=calories, spending=spending)
-    try:
-        db.session.add(record_created)
-        db.session.commit()
-    except:
-        err_msg = "Recording calories failed!"
-        context = dict(data = err_msg)
-        return render_template("index.html", **context)
-    return redirect(url_for('index'))
+	if request.method == 'POST':
+	    uname = request.form['username']
+	    calories = request.form['calories']
+	    spending = request.form['spending']
+	    datetime = datetime.now(tz)
+	    record_created = Record(username = uname, time = datetime, calories=calories, spending=spending)
+	    try:
+	        db.session.add(record_created)
+	        db.session.commit()
+	    except:
+	        err_msg = "Recording calories failed!"
+	        context = dict(data = err_msg)
+	        return render_template("index.html", **context)
+	    return redirect(url_for('index'))
+	else:
+		records = Record.query.filter_by(username=session['username'])
+		return render_template("record.html", records = records)
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
