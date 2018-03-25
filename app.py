@@ -57,6 +57,12 @@ def detect_text(encoded_img):
 def index():
     return render_template("index.html")
 
+@app.route('/record', methods=['POST'])
+def register():
+    uname = request.form['username']
+    print(uname, "afoiasdjfoidjsfojio mickey")    
+    return redirect(url_for('index'))
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'GET':
