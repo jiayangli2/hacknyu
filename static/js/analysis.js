@@ -3,16 +3,25 @@
 
 var totalcal = parseInt($('.totalCal').text())
 var price = parseInt($('.totalPrice').text())
+var uname = ($('.uname').text())
+
+function addHidden(theForm, key, value) {
+    // Create a hidden input element, and append it to the form:
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key; // 'the key/name of the attribute/field that is sent to the server
+    input.value = value;
+    theForm.appendChild(input);
+}
 
 
 
 $('.btn-success').click(function(e){
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/record", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        username: "micky"
-    }));
+    vat theForm = document.recordRes;
+    addHidden(theForm, username, uname);
+    addHidden(theForm, calories, totalcal);
+    addHidden(theForm, spending, price);
+    theForm.submit();
 });
 
 $('.btn-number').click(function(e){
