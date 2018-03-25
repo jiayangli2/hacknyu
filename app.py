@@ -9,6 +9,7 @@ import requests
 import string
 import json
 from datetime import datetime
+from pytz import timezone
 
 app = Flask(__name__)
 
@@ -30,7 +31,7 @@ class Record(db.Model):
 	username = db.Column(db.String(80), primary_key=True, nullable=False)
 	time = db.Column(db.DateTime, primary_key=True, nullable=False, default=datetime.utcnow)
 	calories = db.Column(db.String(120), nullable=False)
-    	spending = db.Column(db.String(120), nullable=False)
+	spending = db.Column(db.String(120), nullable=False)
 	
 	def __repr__(self):
         	return '<User %r>' % self.username
@@ -51,7 +52,7 @@ def detect_text(encoded_img):
 #def filter(response):
 	# food_list = [('shakeburger', '490', '2', '5.19')]
 	# return food_list
-
+tz = timezone('EST')
 
 @app.route('/')
 def index():
@@ -61,7 +62,17 @@ def index():
 @app.route('/record', methods=['POST'])
 def record():
     uname = request.form['username']
-    print(uname, "afoiasdjfoidjsfojio mickey")    
+    calories = request.form['calories']
+    spending = request.form['spending']
+    datetime = datetime.now(tz)
+    record_created = Record(username = uname, time = datetime, calories=calories, spending=spending)
+    try:
+        db.session.add(record_created)
+        db.session.commit()
+    except:
+        err_msg = "Recording calories failed!"
+        context = dict(data = err_msg)
+        return render_template("index.html", **context)
     return redirect(url_for('index'))
 
 @app.route('/register', methods=['POST', 'GET'])
