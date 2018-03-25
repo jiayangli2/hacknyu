@@ -132,7 +132,7 @@ def logout():
 @app.route('/receipt', methods=['POST'])
 def receipt():
 	food_list = filter((request.files['photo'].read()))
-	#print(food_list)
+	print(food_list)
 	#food_list = [('shakeburger', '490', '2', '5.19'), ('smokeshack', '770', '1', '6.69')]
         price_init = 0
         cal_init = 0

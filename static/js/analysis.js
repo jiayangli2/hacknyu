@@ -41,6 +41,7 @@ $('.btn-number').click(function(e){
                 totalcal -= cal;
                 price -= unit_price;
                 $('.totalCal').text(totalcal);
+                $('.totalPrice').text(price);
             } 
             if(parseInt(input.val()) == input.attr('min')) {
                 $(this).attr('disabled', true);
@@ -52,6 +53,7 @@ $('.btn-number').click(function(e){
                 totalcal += cal;
                 price += unit_price;
                 $('.totalCal').text(totalcal);
+                $('.totalPrice').text(price);
             }
             if(parseInt(input.val()) == input.attr('max')) {
                 $(this).attr('disabled', true);
