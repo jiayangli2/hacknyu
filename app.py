@@ -10,6 +10,7 @@ import string
 import json
 from datetime import datetime
 from pytz import timezone
+from gcp_filtrate import filter
 
 app = Flask(__name__)
 
@@ -130,8 +131,8 @@ def logout():
 
 @app.route('/receipt', methods=['POST'])
 def receipt():
-	#food_list = detect_text((request.files['photo'].read()))
-	#print(food_list)
+	food_list = filter((request.files['photo'].read()))
+	print(food_list)
 	food_list = [('shakeburger', '490', '2', '5.19'), ('smokeshack', '770', '1', '6.69')]
 	return render_template("analysis.html", food_list = food_list, price_init=25.25, cal_init=1250)
 
