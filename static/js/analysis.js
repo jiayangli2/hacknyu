@@ -8,7 +8,7 @@ var xhr = new XMLHttpRequest();
 
 
 $('.btn-success').click(function(e){
-    xhr.open("POST", "record", true);
+    xhr.open("POST", "/record", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         username: "micky"
