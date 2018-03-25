@@ -32,12 +32,14 @@ $('.btn-number').click(function(e){
     var input = $("input[name='"+fieldName+"']");
     var currentVal = parseInt(input.val());
     var cal = parseInt($(this).attr('cal'))
+    val unit_price = parseInt($(this).attr('price'));
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
             
             if(currentVal > input.attr('min')) {
                 input.val(currentVal - 1).change();
                 totalcal -= cal;
+                price -= unit_price;
                 $('.totalCal').text(totalcal);
             } 
             if(parseInt(input.val()) == input.attr('min')) {
@@ -48,6 +50,7 @@ $('.btn-number').click(function(e){
             if(currentVal < input.attr('max')) {
                 input.val(currentVal + 1).change();
                 totalcal += cal;
+                price += unit_price;
                 $('.totalCal').text(totalcal);
             }
             if(parseInt(input.val()) == input.attr('max')) {
