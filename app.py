@@ -8,9 +8,29 @@ import time
 import requests
 import string
 import json
+from datetime import datetime
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./app.db'#/home/prokingsley/devfest/app.db' 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
+salt = 'cdea050d7d604afea194572ef22d5297'
+
+
+class User(db.Model):
+    username = db.Column(db.String(80), primary_key=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+class Record(db.Model):
+	username = db.Column(db.String(80), primary_key=True, nullable=False)
+	time = db.Column(db.DateTime, primary_key=True, nullable=False, default=datetime.utcnow)
+	calories = db.Column(db.String(120), nullable=False)
+    spending = db.Column(db.String(120), nullable=False)
 
 def detect_text(encoded_img):
 	session = boto3.Session()
@@ -34,6 +54,50 @@ def detect_text(encoded_img):
 def index():
     return render_template("index.html")
 
+@app.route('/register', methods=['POST'])
+def register():
+    if request.method == 'POST':
+        uname = request.form['username']
+        pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
+        app.logger.info('%s logged in successfully', uname)
+        user_created = User(username = uname, password = pwd)
+        try:
+            db.session.add(user_created)
+            db.session.commit()
+        except:
+            err_msg = "Signing up failed!"
+            context = dict(data = err_msg)
+            return render_template("index.html", **context)
+        session['username'] = uname
+        return redirect(url_for('index'))
+    err_msg = "HTTP Request not supported!"
+    context = dict(data = err_msg)
+    return render_template("index.html", **context)
+
+@app.route('/login', methods=['POST'])
+def login():
+    uname = request.form['username']
+    pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
+    try:
+        temp = User.query.filter_by(username=uname).first()
+        if temp == None or temp.password != pwd:
+            err_msg = "incorrect username or password"
+            context = dict(data = err_msg)
+            print ("no such user")
+            return render_template("index.html", **context)
+        else:
+        	session['username'] = uname
+            return redirect(url_for('index'))
+    except:
+        err_msg = "connection to DB failed"
+        context = dict(data = err_msg)
+        return render_template("index.html", **context)
+
+@app.route('/logout', methods=['POST'])
+def logout():
+	session.clear()
+	return redirect(url_for('index'))
+
 @app.route('/receipt', methods=['POST'])
 def receipt():
 	#food_list = detect_text((request.files['photo'].read()))
@@ -42,4 +106,5 @@ def receipt():
 	return render_template("analysis.html", food_list = food_list, price_init=25.25, cal_init=1250)
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port = 80)
+	db.create_all()
+	app.run(host='0.0.0.0', port = 5000)
