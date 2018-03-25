@@ -42,9 +42,11 @@
         {% for record in records -%}
         <div class="center">
             <div>
-              <span>{{ record.time }}</span>
-              <span>{{ record.calories }}</span>
-              <span>{{ record.spending }}</span>
+              <h4>
+              <span>Date: {{ record.time }}</span>
+              <span>Calories: {{ record.calories }}</span>
+              <span>Spending: {{ record.spending }}</span>
+              </h4>
             </div>
         </div>
         {%- endfor %}
