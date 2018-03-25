@@ -55,6 +55,7 @@ def detect_text(encoded_img):
 
 @app.route('/')
 def index():
+	print ("hi")
     return render_template("index.html")
 
 @app.route('/record', methods=['POST'])
