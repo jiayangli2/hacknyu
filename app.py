@@ -58,7 +58,7 @@ def index():
     return render_template("index.html")
 
 @app.route('/record', methods=['POST'])
-def register():
+def record():
     uname = request.form['username']
     print(uname, "afoiasdjfoidjsfojio mickey")    
     return redirect(url_for('index'))
