@@ -58,10 +58,10 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
 	if request.method == 'GET':
-		return render_template("register.html")
+	    return render_template("register.html")
     if request.method == 'POST':
         uname = request.form['username']
         pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
@@ -81,10 +81,10 @@ def register():
     return render_template("index.html", **context)
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
 	if request.method == 'GET':
-		return render_template("login.html")
+        return render_template("login.html")
     uname = request.form['username']
     pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
     try:
