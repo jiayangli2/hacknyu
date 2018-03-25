@@ -30,7 +30,10 @@ class Record(db.Model):
 	username = db.Column(db.String(80), primary_key=True, nullable=False)
 	time = db.Column(db.DateTime, primary_key=True, nullable=False, default=datetime.utcnow)
 	calories = db.Column(db.String(120), nullable=False)
-    spending = db.Column(db.String(120), nullable=False)
+    	spending = db.Column(db.String(120), nullable=False)
+	
+	def __repr__(self):
+        	return '<User %r>' % self.username
 
 def detect_text(encoded_img):
 	session = boto3.Session()
